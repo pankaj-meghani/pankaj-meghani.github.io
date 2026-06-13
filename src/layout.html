@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} // DevJournal</title>
+  <meta name="description" content="{{description}}">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{title}} // DevJournal">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="article">
+  
+  <!-- Styling -->
+  <link rel="stylesheet" href="../styles.css">
+  
+  <!-- Prism.js Solarized Light Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarizedlight.min.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a href="../index.html" class="logo" id="header-logo">
+        <span>&lt;/&gt;</span> DevJournal
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links">
+          <li><a href="../index.html" id="nav-home">Home</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" id="nav-github">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link" id="back-to-home-link">
+      &larr; Back to all posts
+    </a>
+
+    <article>
+      <header class="post-header">
+        <h1>{{title}}</h1>
+        <div class="post-meta">
+          <time datetime="{{date}}">
+            <svg style="width: 16px; height: 16px; fill: currentColor; vertical-align: middle; margin-right: 4px;" viewBox="0 0 24 24">
+              <path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2h-1V1m-1 11h-5v5h5v-5z"/>
+            </svg>
+            {{formatted_date}}
+          </time>
+          <span>
+            <svg style="width: 16px; height: 16px; fill: currentColor; vertical-align: middle; margin-right: 4px;" viewBox="0 0 24 24">
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+            </svg>
+            {{reading_time}} min read
+          </span>
+          <div class="post-card-tags">
+            {{tags}}
+          </div>
+        </div>
+      </header>
+
+      <section class="post-content">
+        {{content}}
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Harish Meghani. Built with a Solarized Light Theme.</p>
+    <p>Powered by a custom dependency-free Python build workflow.</p>
+  </footer>
+
+  <!-- Prism.js Core and Autoloader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  
+  <script>
+    // Automatically attach interactive copy buttons to all pre code blocks
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre').forEach(pre => {
+        const code = pre.querySelector('code');
+        if (!code) return;
+
+        const btn = document.createElement('button');
+        btn.className = 'copy-code-btn';
+        btn.innerText = 'Copy';
+        btn.type = 'button';
+
+        btn.addEventListener('click', () => {
+          navigator.clipboard.writeText(code.innerText).then(() => {
+            btn.innerText = 'Copied!';
+            setTimeout(() => {
+              btn.innerText = 'Copy';
+            }, 2000);
+          }).catch(err => {
+            console.error('Could not copy text: ', err);
+          });
+        });
+
+        pre.appendChild(btn);
+      });
+    });
+  </script>
+</body>
+</html>
