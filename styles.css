@@ -550,3 +550,61 @@ footer p {
     padding: 1.5rem;
   }
 }
+
+/* AI Disclosures styling */
+.ai-disclosure {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.ai-disclosure strong {
+  color: var(--text-emphasis);
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  display: inline-block;
+  margin-bottom: 0.25rem;
+}
+
+.ai-disclosure svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+}
+
+.no-ai-disclosure {
+  background-color: rgba(133, 153, 0, 0.06);
+  border: 1px solid rgba(133, 153, 0, 0.25);
+  color: var(--text-primary);
+}
+
+.no-ai-disclosure svg {
+  fill: var(--green);
+}
+
+.vibecoded-disclosure {
+  background-color: rgba(108, 113, 196, 0.06);
+  border: 1px solid rgba(108, 113, 196, 0.25);
+  color: var(--text-primary);
+}
+
+.vibecoded-disclosure svg {
+  fill: var(--violet);
+}
+
+.mixed-disclosure {
+  background-color: rgba(181, 137, 0, 0.06);
+  border: 1px solid rgba(181, 137, 0, 0.25);
+  color: var(--text-primary);
+}
+
+.mixed-disclosure svg {
+  fill: var(--yellow);
+}

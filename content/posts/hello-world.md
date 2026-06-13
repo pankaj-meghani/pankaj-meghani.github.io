@@ -3,6 +3,8 @@ title: "Building a Lightweight Static Site Builder"
 date: 2026-06-13
 description: "How I created a zero-dependency dev blog with a custom Python build script, Solarized Light theme, and uv."
 tags: [python, webdev, setup]
+ai_usage: mixed
+ai_usage_details: "This blog post is a prime example of a mixed AI workflow. The initial project outline, stylesheets, and compile scripts were structured with the help of an AI assistant (Antigravity), while the design goals, explanations, and final code reviews were authored by a human developer."
 ---
 
 Welcome to my development blog! In this article, I want to share the design and code behind the static site generator that compiles the very page you are reading.
