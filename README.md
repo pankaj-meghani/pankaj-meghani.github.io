@@ -19,7 +19,8 @@ adventurous-mendeleev/
 ├── posts/               # [Auto-Generated] Compiled blog posts
 ├── index.html           # [Auto-Generated] Compiled homepage
 ├── styles.css           # [Auto-Generated] Main stylesheet copy
-└── build.py             # Custom compiler script (run via uv)
+├── build.py             # Custom compiler script (run via uv)
+└── dev.py               # Local server & file watcher hot rebuilder (run via uv)
 ```
 
 ---
@@ -35,12 +36,12 @@ uv run build.py
 ```
 This script will automatically download Python and the required parsing libraries (`markdown` and `pyyaml`) in a fast, isolated cache, then compile all your posts.
 
-### 2. Preview Locally
-Start a local static server to preview the site:
+### 2. Preview & Watch Locally
+Start the local server and automatic file watcher:
 ```bash
-uv run python -m http.server 8080
+uv run dev.py
 ```
-Open [http://localhost:8080](http://localhost:8080) in your web browser.
+This starts a local development server at [http://localhost:8080](http://localhost:8080) and watches your `content/` and `src/` directories. Any saved changes will trigger an instant rebuild.
 
 ---
 
@@ -71,7 +72,7 @@ console.log(greet("World"));
 Prism.js will automatically detect the language and apply a beautiful Solarized syntax highlighting style with a copy-to-clipboard button.
 ```
 
-After saving your file, run `uv run build.py` to compile it!
+After saving your file, the watcher (`dev.py`) will automatically recompile it! If you aren't running the watcher, run `uv run build.py` to compile manually.
 
 ---
 
