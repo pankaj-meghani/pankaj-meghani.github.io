@@ -189,8 +189,32 @@ def main():
     # Save output index.html
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(index_html)
-        
     print("[OK] Generated index.html")
+    
+    # Generate Sitemap and robots.txt for SEO indexing
+    site_url = "https://pankaj-meghani.github.io/personal-website/"
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    
+    sitemap_urls = [
+        f"  <url>\n    <loc>{site_url}</loc>\n    <lastmod>{today_str}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>"
+    ]
+    
+    for post in posts_data:
+        sitemap_urls.append(
+            f"  <url>\n    <loc>{site_url}posts/{post['slug']}.html</loc>\n    <lastmod>{post['iso_date']}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>"
+        )
+        
+    sitemap_xml = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "\n".join(sitemap_urls) + '\n</urlset>'
+    
+    with open("sitemap.xml", "w", encoding="utf-8") as f:
+        f.write(sitemap_xml)
+    print("[OK] Generated sitemap.xml")
+    
+    robots_txt = f"User-agent: *\nAllow: /\n\nSitemap: {site_url}sitemap.xml\n"
+    with open("robots.txt", "w", encoding="utf-8") as f:
+        f.write(robots_txt)
+    print("[OK] Generated robots.txt")
+    
     print("[OK] Compilation complete! Run local server to view the results.")
 
 if __name__ == "__main__":
