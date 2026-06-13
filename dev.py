@@ -1,7 +1,5 @@
 import http.server
-import os
 import socketserver
-import sys
 import threading
 import time
 
@@ -65,8 +63,8 @@ def main():
     observer.schedule(event_handler, path=".", recursive=True)
     observer.start()
 
-    print(f"[Dev] Development mode active.")
-    print(f"[Dev] Watching for changes in content/ and src/... Press Ctrl+C to stop.")
+    print("[Dev] Development mode active.")
+    print("[Dev] Watching for changes in content/ and src/... Press Ctrl+C to stop.")
 
     try:
         while True:
