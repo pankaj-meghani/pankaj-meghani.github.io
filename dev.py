@@ -39,6 +39,8 @@ class RebuildHandler(FileSystemEventHandler):
             if now - self.last_rebuild > 1.0:
                 print(f"\n[Watch] Change detected in {event.src_path}. Rebuilding...")
                 try:
+                    import importlib
+                    importlib.reload(build)
                     build.main()
                 except Exception as e:
                     print(f"[ERR] Rebuild failed: {e}")
