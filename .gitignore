@@ -3,3 +3,4 @@ sitemap.xml
 robots.txt
 __pycache__/
 /index.html
+/styles.css

@@ -1,3 +1,11 @@
+# /// script
+# dependencies = [
+#   "markdown",
+#   "pyyaml",
+#   "watchdog",
+# ]
+# ///
+
 import http.server
 import socketserver
 import threading

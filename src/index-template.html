@@ -22,37 +22,17 @@
 
         <!-- Styling -->
         <link rel="stylesheet" href="styles.css" />
+
+        <!-- Theme Initialization (prevents flash of light theme) -->
+        <script>
+            const currentTheme = localStorage.getItem("theme") || "light";
+            if (currentTheme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        </script>
     </head>
     <body>
-        <header>
-            <div class="header-container">
-                <a href="index.html" class="logo" id="header-logo">
-                    <span>&lt;/&gt;</span> pankaj-meghani.github.io
-                </a>
-                <nav aria-label="Main navigation">
-                    <ul class="nav-links">
-                        <li><a href="index.html" id="nav-home">Home</a></li>
-                        <li>
-                            <a
-                                href="https://github.com/ParadoxicalNerd"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                id="nav-github"
-                                >GitHub</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="https://www.linkedin.com/in/pankaj-meghani/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                id="nav-github"
-                                >Linkedin</a
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+        {{header}}
 
         <main>
             <section class="hero" aria-labelledby="hero-title">
@@ -83,12 +63,7 @@
             </section>
         </main>
 
-        <footer>
-            <p>
-                &copy; 2026 Pankaj Meghani. Built with a Solarized Light Theme.
-            </p>
-            <p>Powered by a custom dependency-free Python build workflow.</p>
-        </footer>
+        {{footer}}
 
         <script>
             // Client-side tag filtering logic
@@ -126,6 +101,32 @@
                             }
                         });
                     });
+                });
+
+                // Theme Toggle Logic
+                const themeToggle = document.getElementById("theme-toggle");
+                const sunIcon = document.getElementById("theme-toggle-sun");
+                const moonIcon = document.getElementById("theme-toggle-moon");
+
+                function updateThemeUI(theme) {
+                    if (theme === "dark") {
+                        sunIcon.classList.remove("hidden");
+                        moonIcon.classList.add("hidden");
+                    } else {
+                        sunIcon.classList.add("hidden");
+                        moonIcon.classList.remove("hidden");
+                    }
+                }
+
+                // Initial state update
+                updateThemeUI(document.documentElement.getAttribute("data-theme") || "light");
+
+                themeToggle.addEventListener("click", () => {
+                    const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+                    const newTheme = currentTheme === "dark" ? "light" : "dark";
+                    document.documentElement.setAttribute("data-theme", newTheme);
+                    localStorage.setItem("theme", newTheme);
+                    updateThemeUI(newTheme);
                 });
             });
         </script>

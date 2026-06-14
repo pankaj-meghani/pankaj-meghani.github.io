@@ -51,6 +51,10 @@ def main():
         layout_template = f.read()
     with open(os.path.join(src_dir, "index-template.html"), "r", encoding="utf-8") as f:
         index_template = f.read()
+    with open(os.path.join(src_dir, "header.html"), "r", encoding="utf-8") as f:
+        header_template = f.read()
+    with open(os.path.join(src_dir, "footer.html"), "r", encoding="utf-8") as f:
+        footer_template = f.read()
         
     posts_data = []
     all_tags = set()
@@ -175,6 +179,9 @@ def main():
         
         # Substitute into post layout
         post_html = layout_template
+        post_header = header_template.replace("{{path_prefix}}", "../")
+        post_html = post_html.replace("{{header}}", post_header)
+        post_html = post_html.replace("{{footer}}", footer_template)
         replacements = {
             "{{title}}": title,
             "{{description}}": description,
@@ -252,6 +259,9 @@ def main():
     
     # Substitute into index template
     index_html = index_template
+    index_header = header_template.replace("{{path_prefix}}", "")
+    index_html = index_html.replace("{{header}}", index_header)
+    index_html = index_html.replace("{{footer}}", footer_template)
     index_html = index_html.replace("{{tag_buttons}}", tag_buttons_content)
     index_html = index_html.replace("{{posts}}", posts_content)
     

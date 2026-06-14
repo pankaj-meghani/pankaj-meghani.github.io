@@ -19,40 +19,21 @@
 
         <!-- Prism.js Solarized Light Syntax Highlighting -->
         <link
+            id="prism-theme"
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarizedlight.min.css"
         />
+
+        <!-- Theme Initialization (prevents flash of light theme) -->
+        <script>
+            const currentTheme = localStorage.getItem("theme") || "light";
+            if (currentTheme === "dark") {
+                document.documentElement.setAttribute("data-theme", "dark");
+            }
+        </script>
     </head>
     <body>
-        <header>
-            <div class="header-container">
-                <a href="../index.html" class="logo" id="header-logo">
-                    <span>&lt;/&gt;</span> pankaj-meghani.github.io
-                </a>
-                <nav aria-label="Main navigation">
-                    <ul class="nav-links">
-                        <li><a href="../index.html" id="nav-home">Home</a></li>
-                        <li>
-                            <a
-                                href="https://github.com/ParadoxicalNerd"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                id="nav-github"
-                                >GitHub</a
-                            >
-                        </li>
-                        <li>
-                            <a
-                                href="https://www.linkedin.com/in/pankaj-meghani/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                id="nav-github"
-                                >Linkedin</a
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+        {{header}}
 
         <main>
             <a href="../index.html" class="back-link" id="back-to-home-link">
@@ -105,12 +86,7 @@
             </article>
         </main>
 
-        <footer>
-            <p>
-                &copy; 2026 Pankaj Meghani. Built with a Solarized Light Theme.
-            </p>
-            <p>Powered by a custom dependency-free Python build workflow.</p>
-        </footer>
+        {{footer}}
 
         <!-- Prism.js Core and Autoloader -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
@@ -143,6 +119,49 @@
                     });
 
                     pre.appendChild(btn);
+                });
+
+                // Theme Toggle Logic
+                const themeToggle = document.getElementById("theme-toggle");
+                const sunIcon = document.getElementById("theme-toggle-sun");
+                const moonIcon = document.getElementById("theme-toggle-moon");
+                const prismTheme = document.getElementById("prism-theme");
+
+                function updateThemeUI(theme) {
+                    if (theme === "dark") {
+                        sunIcon.classList.remove("hidden");
+                        moonIcon.classList.add("hidden");
+                        if (prismTheme) {
+                            prismTheme.href =
+                                "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css";
+                        }
+                    } else {
+                        sunIcon.classList.add("hidden");
+                        moonIcon.classList.remove("hidden");
+                        if (prismTheme) {
+                            prismTheme.href =
+                                "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-solarizedlight.min.css";
+                        }
+                    }
+                }
+
+                // Initial state update
+                updateThemeUI(
+                    document.documentElement.getAttribute("data-theme") ||
+                        "light",
+                );
+
+                themeToggle.addEventListener("click", () => {
+                    const currentTheme =
+                        document.documentElement.getAttribute("data-theme") ||
+                        "light";
+                    const newTheme = currentTheme === "dark" ? "light" : "dark";
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        newTheme,
+                    );
+                    localStorage.setItem("theme", newTheme);
+                    updateThemeUI(newTheme);
                 });
             });
         </script>
